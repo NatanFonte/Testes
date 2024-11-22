@@ -1,0 +1,368 @@
+﻿@model IEnumerable<MIGHTVR_VS.Models.Servico>
+@{
+    Layout = "~/Views/Shared/_LayoutGerenciamento.cshtml";
+}
+
+<body style="background-color: #05102E;">
+
+    <section class="maneger-page-section">
+        <div class="container page-maneger" style="background-color: white">
+
+            <div class="add-user-button">
+                <h1 class="section-title cliente-title-maneger">Gerenciamento de Serviços</h1>
+                <br />
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group mb-4">
+                            <input id="filtro" type="text" class="form-control" placeholder="Pesquisar Serviços..."
+                                   aria-label="Filtrar" aria-describedby="basic-addon2">
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <!-- Alteração para "text-md-end" para alinhar à direita apenas em telas médias e maiores -->
+                        <button class="btn btn-success btn-lg" onclick="" data-bs-toggle="modal"
+                                data-bs-target="#InserirServico">
+                            <i class="fa fa-plus"></i> Adicionar Serviço
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="max-height: 400px; overflow-y: auto; background-color:white;">
+                <!-- Tabela com cabeçalho fixo -->
+                <table id="TbServicos" class="table" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                    <!-- Cabeçalho fixo -->
+                    <thead style="background-color: #EAE7DC; color: white">
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px; width: 50px; position: sticky; top: 0; background-color: #05102E;">#</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; width: 190px; position: sticky; top: 0; background-color: #05102E;">Tipo de Serviço</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; width: 230px; position: sticky; top: 0; background-color: #05102E;">Valor</th>
+                            <th class="editar" style="border: 1px solid #ddd; padding: 8px; position: sticky; top: 0; background-color: #05102E;">Editar</th>
+                            <th class="excluir" style="border: 1px solid #ddd; padding: 8px; position: sticky; top: 0; background-color: #05102E;">Excluir</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div style="max-height: 300px; overflow-y: auto; overflow-x: hidden;">
+                    <table id="TbServicosBody" class="table" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                        <tbody>
+                            @foreach (var servico in Model)
+                            {
+                                <tr>
+                                    <td style="color: black; border: 1px solid black; padding: 8px;width: 50px">@servico.Id</td>
+                                    <td style="color: black; border: 1px solid black; padding: 8px;width: 190px">@servico.TipoServico</td>
+                                    <td style="color: black; border: 1px solid black; padding: 8px; width: 230px">@servico.Valor.ToString("C")</td> <!-- Exibindo o valor como moeda -->
+
+                                    <td class="text-center" style="border: 1px solid black;">
+                                        <button class="btn btn-default" onclick="definirEdt('@servico.Id', '@servico.TipoServico', '@servico.Valor')" data-bs-toggle="modal" data-bs-target="#EditarServico" style="color: #EAE7DC;">
+                                            <i style="color: orange;" class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
+                                    <td class="text-center" style="border: 1px solid black;">
+                                        <button class="btn btn-default" onclick="definirExc('@servico.Id', '@servico.TipoServico', '@servico.Valor')" data-bs-toggle="modal" data-bs-target="#ExcluirServico" style="color: #EAE7DC;">
+                                            <i style="color: red;" class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>           
+
+        </div>
+
+        <section class="container text-center">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div>
+                    <button type="button" id="send-button2" class="nav-link active btn btn-success btn-block"
+                            style="flex: 1; margin-left: 5px;" onclick="window.location.href = '/Home/Index';">
+                        Voltar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="EditarServico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #05102e; color: white; border-color: aqua;">
+                        <h1 class="modal-title" id="exampleModalLabel">Editar Serviço</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <p style="color:red">Campos com * vermelho são obrigatórios</p>
+
+                            <div class="mb-3 row">
+                                <div class="col-md-7 position-relative">
+                                    <!-- Asterisco à frente do dropdown -->
+                                    <label style="color:red; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 18px; padding 20px">*</label>
+
+                                    @Html.DropDownList("EdtTipoServico", ViewBag.lstTipoServico as SelectList, "Escolha o tipo de Serviço", new
+                                        {
+                                            @class = "form-control",
+                                            @style = "background-color: #EAE7DC; color: #333; border: 1px solid #ccc; padding: 10px; padding-left: 30px;",
+                                            required = "required"
+                                        })
+                                </div>
+                            </div>
+
+
+
+                            <!-- Valor -->
+                            <div class="mb-3 row">
+                                <div class="col-md-6">
+                                    <input id="EdtValor" type="text" placeholder="Digite o valor" class="form-control"
+                                           style="background-color: #EAE7DC; color: #333; border: 1px solid #ccc; padding: 10px;" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="color:red">*</label>
+                                </div>
+                            </div>
+
+                            <!-- Campo oculto -->
+                            <input type="hidden" id="EdtId" value="" />
+
+                        </form>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" onclick=" AlterarServico()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ExcluirServico" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #05102e; color: white; border-color: #eea236;">
+                        <h1 class="modal-title" id="exampleModalLabel">Excluir Serviço</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nome">Nome do Serviço</label>
+                                <input type="text" id="ExcServico" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nome">Valor</label>
+                                <input type="text" id="ExcValor" class="form-control" readonly>
+                            </div>
+                            <input type="hidden" id="ExcId" class="form-control" readonly>
+
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" onclick="ExcluirServico()" class="btn btn-primary">Excluir</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="InserirServico" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header" style="background-color: #05102e; color: white; border-color: #eea236;">
+                        <h1 class="modal-title" id="exampleModalLabel">Adicionar Serviço</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <p style="color:red">Campos com * vermelho são obrigatórios</p>
+                            <div class="mb-3 row">
+                                <div class="col-md-6">
+                                    @Html.DropDownList("TipoServico", ViewBag.lstTipoServico as SelectList, "Escolha o tipo de Usuário", new { @class = "form-control", @style = "width:230px; background-color: #EAE7DC; color: #333;", required = "required" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="color:red">*</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <div class="col-md-6">
+                                    <input id="Valor" type="number" class="form-control" placeholder="Digite o Valor">
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="color:red">*</label>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="IdEdt" value="" />
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" onclick="AdicionarServico()">Adicionar</button>
+                        <!--onclick para chamar a funcao de alteração-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+        <script>
+
+            function definirEdt(id, tiposervico, valor) {
+
+                console.log("tiposervico recebido:", tiposervico);  // Verifique o valor que está sendo passado para a função
+
+                $('#EdtId').val(id);
+                $('#EdtValor').val(valor);
+
+                if ($('#EdtTipoServico').length > 0) {
+                    console.log("Procurando valor no dropdown EdtTipoServico:", tiposervico);
+
+                    // Percorrer todas as opções para encontrar o valor correto
+                    var optionFound = false;
+
+                    $('#EdtTipoServico option').each(function () {
+                        // Comparar o texto das opções com o texto recebido
+                        if ($(this).text() === tiposervico) {
+                            // Marca a opção como selecionada
+                            $(this).prop('selected', true);
+                            optionFound = true;
+                        }
+                    });
+
+                    if (optionFound) {
+                        // Atualiza o chosen, se necessário
+                        $('#EdtTipoServico').trigger('chosen:updated');
+
+                        // Imprime no console o valor da opção selecionada
+                        var selectedValue = $('#EdtTipoServico').val();
+                        console.log("Valor selecionado no dropdown EdtTipoServico:", selectedValue);
+                    } else {
+                        console.log("Opção não encontrada no dropdown.");
+                    }
+                } else {
+                    console.error("DropDownList 'EdtTipoServico' não encontrado.");
+                }
+            }
+
+            function definirExc(id, nome, valor) {
+                console.log(id, nome, valor)
+                $('#ExcId').val(id);
+                $('#ExcServico').val(nome);
+                $('#ExcValor').val(valor);
+            }
+
+            function ExcluirServico() {
+
+                var id = $('#ExcId').val();
+                // Confirmar antes de excluir
+                if (confirm("Você tem certeza que deseja excluir este serviço?")) {
+                    // Fazer a requisição AJAX para excluir o serviço
+                    $.ajax({
+                        url: '/Servico/ExcluirServico',  // Substitua 'SeuController' pelo nome real do seu controller
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            // Verificar se a exclusão foi bem-sucedida
+                            if (response.success) {
+
+                                alert(response.message);  // Exibir mensagem de sucesso
+                                $('#ExcluirServico').modal('hide'); // Exemplo de fechamento de modal
+                                location.reload();  // Opcional: recarrega a página
+                            } else {
+                                alert(response.message);  // Caso haja erro
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Ocorreu um erro ao tentar excluir o serviço: " + error);
+                        }
+                    });
+                }
+            }
+
+            function AlterarServico() {
+
+                var id = $('#EdtId').val();
+                var tipoSevico = $('#EdtTipoServico option:selected').text()
+                var valor = $('#EdtValor').val();
+
+                // Fazer a requisição AJAX para atualizar o serviço
+                $.ajax({
+                    url: '/Servico/AtualizarServico',  // Substitua 'SeuController' pelo nome real do seu controller
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        TipoServico: tipoSevico,
+                        Valor: valor
+                    },
+                    success: function (response) {
+                        // Verificar se a atualização foi bem-sucedida
+                        if (response.success) {
+                            alert("Serviço " + tipoSevico + " alterado com sucesso!");
+                            $('#EditarServico').modal('hide');
+                            location.reload();  // Opcional: recarrega a página
+                        } else {
+                            alert(response.message); // Caso haja erro
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Ocorreu um erro ao tentar atualizar o serviço: " + error);
+                    }
+                });
+            }
+
+            function AdicionarServico() {
+
+                var tipoServico = $('#TipoServico option:selected').text();
+                var Valor = $('#Valor').val();
+
+                // Objeto com os dados para enviar via AJAX
+                var dados = {
+                    tipoServico: tipoServico,
+                    Valor: Valor
+                };
+
+                console.log(dados); // Verifica os dados antes de enviar
+
+                // Requisição AJAX
+                $.ajax({
+                    url: '@Url.Action("InserirServico", "Servico")', // Substitua "NomeDoController" pelo nome da sua controller
+                    type: 'POST',
+                    dataType: 'json',
+                    data: dados,
+                    success: function (response) {
+                        // Exibe a mensagem de sucesso ou erro
+                        if (response.success) {
+                            alert(response.message);  // Exibe mensagem de sucesso
+                            // Se necessário, fecha o modal ou faz outra ação aqui
+                            $('#InserirServicoModal').modal('hide'); // Exemplo de fechamento de modal
+                            location.reload();  // Opcional: recarrega a página
+                        } else {
+                            alert(response.message);  // Exibe mensagem de erro
+                        }
+                    },
+                    error: function () {
+                        alert('Erro ao processar a solicitação. Tente novamente.');
+                    }
+                });
+            }
+
+
+
+
+        </script>
+
+    </section>
+
+</body>

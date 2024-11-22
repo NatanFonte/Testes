@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIGHTVR-VS", "MIGHTVR-VS.csproj", "{1225DF9A-8100-4A17-A901-7623573080CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsMIGHTVR", "..\TestsSiteAgendamento\TestsMIGHTVR.csproj", "{DE451D35-9D8B-457D-8BA7-76204EF6DC6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1225DF9A-8100-4A17-A901-7623573080CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1225DF9A-8100-4A17-A901-7623573080CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1225DF9A-8100-4A17-A901-7623573080CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1225DF9A-8100-4A17-A901-7623573080CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE451D35-9D8B-457D-8BA7-76204EF6DC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE451D35-9D8B-457D-8BA7-76204EF6DC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE451D35-9D8B-457D-8BA7-76204EF6DC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE451D35-9D8B-457D-8BA7-76204EF6DC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC72C6B4-FFE5-4BCE-B4F3-ACE9D3C5896A}
+	EndGlobalSection
+EndGlobal

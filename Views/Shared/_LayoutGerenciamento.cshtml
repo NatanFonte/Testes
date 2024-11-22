@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/css/submenu.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <style>
+        /* Dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #00C5DC;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 8px;
+            border-radius: 3%;
+            right: 0; /* Alinha o submenu à direita */
+        }
+
+            /* Estilo dos links no dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 18px; /* Padding uniforme */
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                margin: 5px 0; /* Margem uniforme em cima e embaixo */
+                border-radius: 3%;
+                transition: background-color 0.3s, color 0.3s, border 0.3s; /* Transição suave */
+            }
+
+                /* Efeito de hover */
+                .dropdown-content a:hover {
+                    color: #05102E;
+                    background-color: #ddd;
+                    border: 2px solid #05102E;
+                }
+
+        /* Exibe o dropdown ao passar o mouse */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>   
+    <header>
+        <header class="header">
+            <!-- Logo -->
+            <a class="logo" href="#home" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="~/images/Home/MIGHTVR.jpg" alt="About-Image"
+                 style="width: 50px; height: 50px; margin-right: 10px;">
+            <h2 style="margin: 0; font-size: 24px;">MIGHTVR</h2>
+        </a>
+            <nav class="dropdown" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <span style="display: flex; align-items: center; margin-right: 20px;">
+                    <i class="fas fa-home fa-lg" aria-hidden="true" style="color: aqua;"></i>
+                    <a href="/Home/Index" style="margin-left: 10px; color: white !important">Inicio</a>
+                </span>
+
+
+                <div class="dropdown" style="position: relative; display: inline-block;">
+                    <span style="display: flex; align-items: center; margin-right: 20px;">
+                        <i class="fa fa-user" aria-hidden="true" style="color: aqua;"></i>
+                        <a href="/Usuario/Login" style="margin-left: 10px; color:white !important">Login</a>
+                    </span>
+                    <div class="dropdown-content"
+                         style="display: none; position: absolute; background-color: white; width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; padding: 8px; border-radius: 3%; border: aqua solid 1px; box-shadow: 5px white;">
+                        <a href="/Usuario/Index" style="padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; color: black!important">
+                            <i class="fa fa-users" aria-hidden="true" style="margin-right: 8px;"></i>
+                            Usuarios
+                        </a>
+                        <a href="/Agendamento/Index"
+                           style="padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; color: black!important">
+                            <i class="fa fa-calendar" aria-hidden="true" style="margin-right: 8px;"></i>
+                            Agendamento Admin
+                        </a>
+                        <a href="/Agendamento/AgendamentoUsuarioIndex"
+                           style=" padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; color: black!important">
+                            <i class="fa fa-calendar" aria-hidden="true" style="margin-right: 8px;"></i>
+                            Agendamento User
+                        </a>
+                        <a href="/Agendamento/CadastroAgendamento"
+                           style=" padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; color: black!important">
+                            <i class="fa fa-file" aria-hidden="true" style="margin-right: 8px;"></i>
+                            Cadastro Agendamentos
+                        </a>
+                        <a href="/Servico/Index"
+                           style=" padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; color: black!important">
+                            <i class="fas fa-gavel fa-lg" aria-hidden="true" style="margin-right: 8px;"></i></i>
+                            Serviço
+                        </a>
+                        <a href="#logout"
+                           style=" padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; color: black!important">
+                            <i class="fa fa-align-justify" aria-hidden="true" style="margin-right: 8px;"></i><b></b>
+                            Relatório
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </header>
+    <div>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>    
+
+    <script src="~/lib/swiper/swiper-bundle.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        // Script to handle the dropdown functionality
+        document.querySelector('.dropdown').addEventListener('mouseover', function () {
+            this.querySelector('.dropdown-content').style.display = 'block';
+        });
+
+        document.querySelector('.dropdown').addEventListener('mouseout', function () {
+            this.querySelector('.dropdown-content').style.display = 'none';
+        });
+
+
+    </script>
+</body>
+
+
+</html>

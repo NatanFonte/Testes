@@ -1,0 +1,974 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>MIGHTVR</title>
+
+    <!-- Font-Awesome CSS -->
+    <link rel="stylesheet" href="~/vendors/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="~/vendors/swiper/swiper.css" />
+
+    <!-- Magnific-Popup CSS -->
+    <link rel="stylesheet" href="~/vendors/magnific-popup/magnific-popup.css" />
+
+    <!-- Custom Stylesheets -->
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    <style>
+        /* Dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #00C5DC;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 8px;
+            border-radius: 3%;
+            right: 0; /* Alinha o submenu à direita */
+        }
+
+            /* Estilo dos links no dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 18px; /* Padding uniforme */
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                margin: 5px 0; /* Margem uniforme em cima e embaixo */
+                border-radius: 3%;
+                transition: background-color 0.3s, color 0.3s, border 0.3s; /* Transição suave */
+            }
+
+                /* Efeito de hover */
+                .dropdown-content a:hover {
+                    color: #05102E;
+                    background-color: #ddd;
+                    border: 2px solid #05102E;
+                }
+
+        /* Exibe o dropdown ao passar o mouse */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-------------------- Scroll-Top Area (Start) -------------------->
+    <a href="#home" class="scroll-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-------------------- Scroll-Top Area (End) -------------------->
+    <!-------------------- Header Area (Start) -------------------->
+    <header class="header">
+
+        <!-- Logo -->
+        <a class="logo" href="#home" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="~/images/Home/MIGHTVR.jpg" alt="About-Image"
+                 style="width: 50px; height: 50px; margin-right: 10px;">
+            <h2 style="margin: 0; font-size: 24px;">MIGHTVR</h2>
+        </a>
+        <!-- Logo End -->
+        <!-- Navbar -->
+
+        <nav class="navbar" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fas fa-home fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#home" style="margin-left: 10px;">Inicio</a>
+            </span>
+
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fas fa-info-circle fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#about" style="margin-left: 10px;">sobre</a>
+            </span>
+
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fas fa-gavel fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#service" style="margin-left: 10px;">Serviço</a>
+            </span>
+
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fas fa-window-restore fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#portfolio" style="margin-left: 10px;">Portfolio</a>
+            </span>
+
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fa fa-users fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#testimonial" style="margin-left: 10px;">Depoimento</a>
+            </span>
+
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fa fa-file fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#blog" style="margin-left: 10px;">Noticias</a>
+            </span>
+
+            <span style="display: flex; align-items: center; margin-right: 20px;">
+                <i class="fa fa-phone-square fa-lg" aria-hidden="true" style="color:white ;"></i>
+                <a href="#contact" style="margin-left: 10px;">Contato</a>
+            </span>
+            <div class="dropdown" style="position: relative; display: inline-block;">
+                <span style="display: flex; align-items: center; margin-right: 20px;">
+                    <i class="fa fa-user" aria-hidden="true" style="color: white;"></i>
+                    <a href="/Usuario/Login" style="margin-left: 10px;">Login</a>
+                </span>
+                <div class="dropdown-content"
+                     style="display: none; position: absolute; background-color: #f9f9f9; width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; padding: 8px; border-radius: 3%;">
+                    <a href="/Usuario/Index"
+                       style="color: black; padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px;">
+                        <i class="fa fa-users" aria-hidden="true" style="margin-right: 8px;"></i>
+                        Usuarios
+                    </a>
+                    <a href="/Agendamento/Index"
+                       style="color: black; padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px; ">
+                        <i class="fa fa-calendar" aria-hidden="true" style="margin-right: 8px;"></i>
+                        Agendamento Admin
+                    </a>
+                    <a href="/Agendamento/AgendamentoUsuarioIndex"
+                       style="color: black; padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px;">
+                        <i class="fa fa-calendar" aria-hidden="true" style="margin-right: 8px;"></i>
+                        Agendamento User
+                    </a>
+                    <a href="/Servico/Index"
+                       style="color: black; padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px;">
+                        <i class="fa fa-cogs" aria-hidden="true" style="margin-right: 8px" ;></i>
+                        Serviços
+                    </a>
+                    <a href="/Agendamento/CadastroAgendamento"
+                       style="color: black; padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px;">
+                        <i class="fa fa-id-card" aria-hidden="true" style="margin-right: 8px" ;></i>
+                        Cadastro/Agendamento
+                    </a>
+                    <a href="#logout"
+                       style="color: black; padding: 7px; text-decoration: none; display: flex; align-items: center; margin: 5px;">
+                        <i class="fa fa-file" aria-hidden="true" style="margin-right: 8px"></i>
+                        Relatório
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- Menubar -->
+        <div class="fas fa-bars" id="menu-btn"></div>
+
+    </header>
+    <!-------------------- Header Area (End) -------------------->
+    <!-------------------- Home Area (Start) -------------------->
+    <section class="home" id="home">
+
+        <div class="box-container">
+
+            <div class="content">
+                <div class="text">
+                    <h2>
+                        Seja Bem-Vindo!</h1>
+                        <h1><span class="typing-text"></span></h1>
+                        <p>
+                            Bem-vindo à MIGHTVR! Somos uma empresa inovadora especializada em soluções de Realidade
+                            Virtual (VR). Com mais de 5 anos de experiência, temos orgulho em oferecer soluções de alta
+                            tecnologia para diversas organizações.
+
+                            Nossa gama de serviços inclui consultoria em VR, desenvolvimento de aplicativos VR
+                            personalizados e venda de equipamentos VR de última geração. Nossa equipe de desenvolvedores
+                            criativos está sempre pronta para transformar suas ideias em realidade.
+
+                            Em nosso site, você encontrará detalhes sobre nossos serviços, um portfólio de nossos
+                            trabalhos anteriores e depoimentos de nossos clientes satisfeitos. Fique à vontade para
+                            explorar e entrar em contato conosco se tiver alguma dúvida. Estamos ansiosos para trabalhar
+                            com você!
+                        </p>
+                        <a href="#" class="btn">Saiba Mais... <i class="fas fa-user"></i></a>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="~/images/Home/MIGHTVR.jpg
+                " alt="Home-Image">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-------------------- Home Area (End) -------------------->
+    <!-------------------- About Area (Start) -------------------->
+    <section class="about" id="about">
+
+        <div class="box-container">
+
+            <div class="image">
+                <img src="~/images/Home/MIGHTVR.jpg" alt="About-Image" />
+            </div>
+
+            <div class="content">
+
+                <h2>Sobre a MIGHTVR</h2>
+                <p>
+                    Na MIGHTYVR, somos apaixonados por explorar o potencial da Realidade Virtual (VR) para criar
+                    experiências envolventes e impactantes.
+                    Nossas soluções são moldadas pelas seguintes tecnologias: Unity, Unreal, Renderização
+                    Estereoscópica, Áudio Espacial, Rastreamento de Posição e Movimento etc.
+                </p>
+
+                <div class="about-info">
+
+                    <div class="info">
+                        <h4>tempo de existência: <span>5</span></h4>
+                        <h4>ramo de atuação: <span>Tecnologia e Informação</span></h4>
+                        <h4>países: <span>Brasil, Estados Unidos</span></h4>
+                        <h4>Serviço: <span>Desenvolvimento e auxilio de tecnologia VR</span></h4>
+                        <h4><span></span></h4>
+                    </div>
+
+                    <div class="counting">
+
+                        <div class="box">
+                            <h1 class="count" data-count="5">5</h1>
+                            <h3>Anos de experiência</h3>
+                        </div>
+
+                        <div class="box">
+                            <h1 class="count" data-count="100">100+</h1>
+                            <h3>projetos completados</h3>
+                        </div>
+
+                        <div class="box">
+                            <h1 class="count" data-count="80">80+</h1>
+                            <h3>Clientes satisfeitos</h3>
+                        </div>
+
+                        <div class="box">
+                            <h1 class="count" data-count="20">20+</h1>
+                            <h3>Total prêmios ganhos</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="skill-container">
+
+            <div class="heading">
+                <h2>Eficiência <span>Operacional</span></h2>
+            </div>
+
+            <div class="skills">
+                <div class="skill-item item1">
+                    <div class="box">
+                        <h3>Taxa de crescimento anual<span> 15% </span> </h3>
+                        <div class="progress-bar"> <span></span> </div>
+                    </div>
+                    <div class="box">
+                        <h3>Satisfação do Cliente<span> 92% </span> </h3>
+                        <div class="progress-bar"> <span></span> </div>
+                    </div>
+                    <div class="box">
+                        <h3>Eficiência Operacional<span> 20% </span> </h3>
+                        <div class="progress-bar"> <span></span> </div>
+                    </div>
+                </div>
+
+                <div class="skill-item item2">
+                    <div class="box">
+                        <h3>Market Share<span> 30% </span> </h3>
+                        <div class="progress-bar"> <span></span> </div>
+                    </div>
+                    <div class="box">
+                        <h3>Taxa de redenção de clientes<span> 80% </span> </h3>
+                        <div class="progress-bar"> <span></span> </div>
+                    </div>
+                    <div class="box">
+                        <h3>Eficiência de entrega<span> 90% </span> </h3>
+                        <div class="progress-bar"> <span></span> </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-------------------- About Area (End) -------------------->
+    <!-------------------- Qualification Area (Start) -------------------->
+    <section class="qualification">
+
+        <div class="heading">
+            <h2>Principais <span>tecnologias que utilizamos</span></h2>
+        </div>
+
+        <div class="box-container">
+
+            <div class="education">
+
+                <div class="experience-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="content">
+                        <span>2025</span>
+                        <h3>Motor Gráfico Unity</h3>
+                        <p>
+                            O Unity é um motor gráfico amplamente utilizado para desenvolvimento de jogos e experiências
+                            em realidade virtual (VR).
+                            Ele oferece ferramentas para criação de ambientes 3D
+                            , física, animações e interações.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="content">
+                        <span>2025</span>
+                        <h3>Motor Gráfico Unreal Engine</h3>
+                        <p>
+                            O Unreal Engine é outro motor gráfico popular usado na indústria de jogos e VR.
+                            Ele oferece recursos avançados de renderização, física e criação de ambientes imersivos.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="content">
+                        <span>2025</span>
+                        <h3>Dispositivos de Hardware VR</h3>
+                        <p>
+                            Essa categoria abrange os dispositivos físicos usados para experiências de realidade virtual,
+                            como óculos VR, luvas de rastreamento
+                            de movimento e controles..
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="experience">
+
+                <div class="experience-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="content">
+                        <span>2025</span>
+                        <h3>Renderização Estereoscópica</h3>
+                        <p>
+                            A renderização estereoscópica é uma técnica que cria a ilusão de profundidade em imagens 3D,
+                            permitindo que cada olho veja uma imagem ligeiramente diferente para criar a sensação de
+                            profundidade.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="content">
+                        <span>2025</span>
+                        <h3>Áudio Espacial</h3>
+                        <p>
+                            O áudio espacial é crucial para a imersão em ambientes virtuais. Ele simula sons vindo de
+                            diferentes direções,
+                            proporcionando uma experiência mais realista.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="content">
+                        <span>2025</span>
+                        <h3>Rastreamento de Posição e Movimento</h3>
+                        <p>
+                            Essa tecnologia permite rastrear a posição e os movimentos do usuário em tempo real.
+                            É fundamental para interações precisas em ambientes VR..
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-------------------- Qualification Area (End) -------------------->
+    <!-------------------- Services Area (Start) -------------------->
+    <section class="service" id="service">
+
+        <div class="heading">
+            <h2>Meus <span>Serviços</span></h2>
+        </div>
+
+        <div class="box-container">
+
+            <div class="service-item">
+                <i class="fa fa-cubes" aria-hidden="true"></i>
+                <h3>Design de Experiências em VR</h3>
+                <p>Criação de ambientes virtuais imersivos sob medida para jogos e mídia interativa.</p>
+            </div>
+
+            <div class="service-item">
+                <i class="fa fa-podcast" aria-hidden="true"></i>
+                <h3>Criação de Tour Virtuais</h3>
+                <p>Desenvolvimento de tours em 360 graus para imóveis, museus e fins educacionais.</p>
+            </div>
+
+            <div class="service-item">
+                <i class="fas fa-camera"></i>
+                <h3>Programas de Treinamento em VR</h3>
+                <p>Simulações personalizadas para treinamento em diversas áreas, como saúde, aviação e militar.</p>
+            </div>
+
+            <div class="service-item">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Eventos Interativos em VR</h3>
+                <p>
+                    Organização de eventos de realidade virtual com atividades envolventes para construção de equipes
+                    remotas ou entretenimento.
+                </p>
+            </div>
+
+            <div class="service-item">
+                <i class="fa fa-gamepad" aria-hidden="true"></i>
+                <h3>Demonstrações Vituais de Produtos</h3>
+                <p>
+                    Produção de demonstrações detalhadas de produtos em um espaço virtual para mostrar recursos e
+                    usabilidade.
+                </p>
+            </div>
+
+            <div class="service-item">
+                <i class="fa fa-laptop" aria-hidden="true"></i>
+                <h3>Publicidade em Realidade Aumentada</h3>
+                <p>
+                    Campanhas inovadoras de AR que mesclam conteúdo digital com o mundo real para capturar o interesse
+                    dos clientes.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+    <!-------------------- Services Area (End) -------------------->
+    <!-------------------- Portfolio Area (Start) -------------------->
+    <section class="portfolio" id="portfolio">
+
+        <div class="heading">
+            <h2>Nosso <span>portfólio</span></h2>
+        </div>
+
+        <div class="gallery">
+
+            <ul class="controls">
+                <li class="button btn active" data-filter="all">Todos</li>
+                <li class="button btn" data-filter="web">Mais vendidos</li>
+                <li class="button btn" data-filter="design">Mais acessados</li>
+                <li class="button btn" data-filter="photography">Mais Comentados</li>
+            </ul>
+
+            <div class="box-container">
+
+                <div class="portfolio-item image web">
+                    <img src="~/images/Portfolio/portfolio-1.png" alt="Portfolio-Image" />
+                    <div class="content">
+                        <h4>Data Analysis</h4>
+                        <p>Tecnologia</p>
+                        <a data-effect="mfp-newspaper" href="~/images/Portfolio/portfolio-1.png" class="view-btn">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item image web">
+                    <img src="~/images/Portfolio/portfolio-2.png" alt="Portfolio-Image" />
+                    <div class="content">
+                        <h4>Podcasting</h4>
+                        <p>Comunicação</p>
+                        <a data-effect="mfp-newspaper" href="~/images/Portfolio/portfolio-2.png" class="view-btn">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item image design">
+                    <img src="~/images/Portfolio/portfolio-3.png" alt="Portfolio-Image" />
+                    <div class="content">
+                        <h4>Digital Art Creation</h4>
+                        <p>Design</p>
+                        <a data-effect="mfp-newspaper" href="~/images/Portfolio/portfolio-3.png" class="view-btn">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item image design">
+                    <img src="~/images/Portfolio/portfolio-4.png" alt="Portfolio-Image" />
+                    <div class="content">
+                        <h4>Molecular Research</h4>
+                        <p>Ciência</p>
+                        <a data-effect="mfp-newspaper" href="~/images/Portfolio/portfolio-4.png" class="view-btn">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="portfolio-item image photography">
+                    <img src="~/images/Portfolio/portfolio-5.png" alt="Portfolio-Image" />
+                    <div class="content">
+                        <h4>Urban Nightlife</h4>
+                        <p>Fotografia</p>
+                        <a data-effect="mfp-newspaper" href="~/images/Portfolio/portfolio-5.png" class="view-btn">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item image photography">
+                    <img src="~/images/Portfolio/portfolio-6.png" alt="Portfolio-Image" />
+                    <div class="content">
+                        <h4>Construction Planning</h4>
+                        <p>Engenharia</p>
+                        <a data-effect="mfp-newspaper" href="~/images/Portfolio/portfolio-6.png" class="view-btn">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-------------------- Portfolio Area (End) -------------------->
+    <!-------------------- Testimonials Area (Start) -------------------->
+    <section class="testimonial" id="testimonial">
+
+        <div class="heading">
+            <h2><span>Comentários</span></h2>
+        </div>
+
+        <div class="swiper-container testimonial-slider">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide testi-item">
+                    <img src="~/images/Testimonials/fotopessoa1.png" alt="Testimonial-Pic" />
+
+                    <i class="fas fa-quote-left"></i>
+
+                    <p class="comment">
+                        Eventos interativos em realidade virtual oferecem experiências imersivas e envolventes. Os
+                        participantes podem explorar ambientes virtuais, interagir com objetos e até mesmo colaborar com
+                        outras pessoas em tempo real.
+                        Essa abordagem inovadora permite criar conexões significativas e memoráveis durante eventos.
+                    </p>
+
+                    <div class="intro">
+                        <h3>satoru gojo</h3>
+                        <h5>Eventos Interativos em VR</h5>
+                    </div>
+                </div>
+
+                <div class="swiper-slide testi-item">
+                    <img src="~/images/Testimonials/fotopessoa2.png" alt="Testimonial-Pic" />
+
+                    <i class="fas fa-quote-left"></i>
+
+                    <p class="comment">
+                        O design de experiências em VR é uma combinação de criatividade e tecnologia.
+                        Ele envolve a criação de interfaces intuitivas, navegação fluida e elementos visuais cativantes
+                        para garantir que os usuários se sintam imersos e engajados. A atenção aos detalhes é
+                        fundamental para proporcionar uma experiência excepcional.
+                    </p>
+
+                    <div class="intro">
+                        <h3>evelyn jones</h3>
+                        <h5>Design de Experiências em VR</h5>
+                    </div>
+                </div>
+
+                <div class="swiper-slide testi-item">
+                    <img src="~/images/Testimonials/fotopessoa3.png" alt="Testimonial-Pic" />
+
+                    <i class="fas fa-quote-left"></i>
+
+                    <p class="comment">
+                        Tours virtuais em VR oferecem uma maneira única de explorar locais, museus, propriedades
+                        imobiliárias e muito mais. Os participantes podem “caminhar” pelos espaços, observar detalhes e
+                        obter informações relevantes.
+                        Essa abordagem é especialmente útil para apresentações e marketing.
+                    </p>
+
+                    <div class="intro">
+                        <h3>Chico gunha</h3>
+                        <h5>Criação de Tours Virtuais</h5>
+                    </div>
+                </div>
+
+                <div class="swiper-slide testi-item">
+                    <img src="~/images/Testimonials/fotopessoa4.png" alt="Testimonial-Pic" />
+
+                    <i class="fas fa-quote-left"></i>
+
+                    <p class="comment">
+                        Os programas de treinamento em VR são eficazes para simular situações do mundo real. Eles
+                        permitem que os participantes pratiquem habilidades, tomem decisões e enfrentem desafios sem
+                        riscos.
+                        Essa abordagem é amplamente utilizada em setores como saúde, indústria e aviação, e bem
+                        importante para a tecnologia.
+                    </p>
+
+                    <div class="intro">
+                        <h3>Doidão Jones</h3>
+                        <h5>Programas de Treinamento em VR</h5>
+                    </div>
+                </div>
+
+                <div class="swiper-slide testi-item">
+                    <img src="~/images/Testimonials/fotopessoa5.png" alt="Testimonial-Pic" />
+
+                    <i class="fas fa-quote-left"></i>
+
+                    <p class="comment">
+                        As demonstrações virtuais de produtos em VR oferecem aos clientes a oportunidade de explorar
+                        produtos antes de comprá-los.
+                        Isso é especialmente útil para itens complexos, como carros, móveis ou equipamentos industriais.
+                        Os usuários podem interagir com os produtos e entender melhor seus recursos.
+                    </p>
+
+                    <div class="intro">
+                        <h3>samit patel</h3>
+                        <h5>Demonstrações Virtuais de Produtos</h5>
+                    </div>
+                </div>
+
+                <div class="swiper-slide testi-item">
+                    <img src="~/images/Testimonials/fotopessoa6.png" alt="Testimonial-Pic" />
+
+                    <i class="fas fa-quote-left"></i>
+
+                    <p class="comment">
+                        A publicidade em realidade aumentada (AR) combina elementos virtuais com o mundo real. Anúncios
+                        AR podem aparecer em revistas, outdoors ou até mesmo em aplicativos móveis.
+                        Eles envolvem os usuários de maneira criativa, proporcionando uma experiência memorável e
+                        impactante, e eu devo agradecer pela experiência
+                    </p>
+
+                    <div class="intro">
+                        <h3>Homi simpsons</h3>
+                        <h5>Publicidade em Realidade Aumentada</h5>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-pagination swiper-pagination1"></div>
+
+        </div>
+    </section>
+    <!-------------------- Testimonials Area (End) -------------------->
+    <!-------------------- Blog Area (Start) -------------------->
+    <section class="blog" id="blog">
+
+        <div class="heading">
+            <h2>my <span>blog</span></h2>
+        </div>
+
+        <div class="swiper-container blog-slider">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide blog-item">
+                    <div class="image">
+                        <img src="~/images/Blogs/Design de experiência em vr.png" alt="Blog-Image" />
+                    </div>
+                    <div class="content">
+                        <div class="intro">
+                            <h5><i class="fas fa-calendar-alt"></i><span>10 junho, 2024</span></h5>
+                            <h5><i class="fas fa-user"></i><span>by Panrotas</span></h5>
+                        </div>
+                        <a class="main-heading" href="#">
+                            Experiências de realidade virtual no Complexo de Visitantes da
+                            NASA
+                        </a>
+                        <p>
+                            Visitantes têm a sensação de estarem pousando e explorando a superfície lunar
+                        </p>
+                        <a href="https://www.panrotas.com.br/kennedy/entretenimento/2024/06/experiencias-de-realidade-virtual-no-complexo-de-visitantes-da-nasa_206111.html"
+                           class="btn">saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide blog-item">
+                    <div class="image">
+                        <img src="~/images/Blogs/segundo bagulho.png" alt="Blog-Image" />
+                    </div>
+                    <div class="content">
+                        <div class="intro">
+                            <h5><i class="fas fa-calendar-alt"></i><span>5 jan, 2019</span></h5>
+                            <h5><i class="fas fa-user"></i><span>by tecnoblog</span></h5>
+                        </div>
+                        <a class="main-heading" href="#">
+                            Unreal Engine 5 chega para criar jogos ultrarrealistas com
+                            melhor desempenho
+                        </a>
+                        <p>
+                            Desenvolvedores já podem baixar a primeira versão estável da Unreal Engine 5, engine da Epic
+                            Games que será usado no próximo The Witcher
+                        </p>
+                        <a href="https://tecnoblog.net/noticias/unreal-engine-5-chega-para-criar-jogos-ultrarrealistas-com-melhor-desempenho/"
+                           class="btn">saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide blog-item">
+                    <div class="image">
+                        <img src="~/images/Blogs/Captura de tela 2024-06-20 090055.png" alt="Blog-Image" />
+                    </div>
+                    <div class="content">
+                        <div class="intro">
+                            <h5><i class="fas fa-calendar-alt"></i><span>13 junho, 2024</span></h5>
+                            <h5><i class="fas fa-user"></i><span>by IPNews</span></h5>
+                        </div>
+                        <a class="main-heading" href="#">
+                            Vertiv Academy, um serviço de treinamento de profissionais em
+                            data center
+                        </a>
+                        <p>
+                            Edge computing e inteligência artificial vai intensificar o consumo da infraestrutura de TI,
+                            mais especificamente os data centers.
+                        </p>
+                        <a href="https://ipnews.com.br/vertiv-academy-um-servico-de-treinamento-de-profissionais-em-data-center/"
+                           class="btn">saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide blog-item">
+                    <div class="image">
+                        <img src="~/images/Blogs/Captura de tela 2024-06-20 091003.png" alt="Blog-Image" />
+                    </div>
+                    <div class="content">
+                        <div class="intro">
+                            <h5><i class="fas fa-calendar-alt"></i><span>7 junho, 2024</span></h5>
+                            <h5><i class="fas fa-user"></i><span>by O GLOBO</span></h5>
+                        </div>
+                        <a class="main-heading" href="#">
+                            Shows e realidade virtual no Rio2C, festa para Museu Nacional e
+                            outros eventos do fim de semana
+                        </a>
+                        <p>
+                            De encontro que apresenta as novidades do universo dos games e da mídia aos 206 anos do Museu
+                            Nacional,
+                            confira opções da programação
+                        </p>
+                        <a href="#" class="btn">read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide blog-item">
+                    <div class="image">
+                        <img src="~/images/Blogs/Captura de tela 2024-06-20 091712.png" alt="Blog-Image" />
+                    </div>
+                    <div class="content">
+                        <div class="intro">
+                            <h5><i class="fas fa-calendar-alt"></i><span>12 junho, 2024</span></h5>
+                            <h5><i class="fas fa-user"></i><span>by E-commerce Brasil</span></h5>
+                        </div>
+                        <a class="main-heading" href="#">
+                            Ferramentas alimentadas por inteligência artificial ganham cada
+                            vez mais espaço no e-commerce brasileiro
+                        </a>
+                        <p>
+                            A evolução do e-commerce no Brasil promete crescer mais. Uma projeção da ABComm indica que o
+                            faturamento das lojas virtuais
+                        </p>
+                        <a href="https://www.ecommercebrasil.com.br/noticias/ferramentas-inteligencia-artificial-ganham-espaco-no-e-commerce-brasileiro"
+                           class="btn">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide blog-item">
+                    <div class="image">
+                        <img src="~/images/Blogs/Captura de tela 2024-06-20 092117.png" alt="Blog-Image" />
+                    </div>
+                    <div class="content">
+                        <div class="intro">
+                            <h5><i class="fas fa-calendar-alt"></i><span>26 maio, 2024</span></h5>
+                            <h5><i class="fas fa-user"></i><span>by Rogério Tobias</span></h5>
+                        </div>
+                        <a class="main-heading" href="#">
+                            Outdoors 3D e realidade aumentada: A fronteira da
+                            publicidade
+                        </a>
+                        <p>
+                            Estamos vivendo um novo horizonte da comunicação visual. É importante percebermos como a
+                            tecnologia e inovação
+                        </p>
+                        <a href="https://www.em.com.br/colunistas/rogerio-tobias/2024/05/6863949-outdoors-3d-e-realidade-aumentada-a-fronteira-da-publicidade.html"
+                           class="btn">Saiba Mais<i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-pagination swiper-pagination2"></div>
+
+        </div>
+
+    </section>
+    <!-------------------- Blog Area (End) -------------------->
+    <!-------------------- Contact Area (Start) -------------------->
+    <section class="contact" id="contact">
+
+        <div class="heading">
+            <h2><span>Nossos</span> Contatos</h2>
+        </div>
+
+        <div class="box-container">
+
+            <div class="contact-info">
+
+                <h3>Contate-nos</h3>
+
+                <p>Nossos canais de contato</p>
+
+                <div class="info-item">
+                    <h4>Telefone:</h4>
+                    <div class="detail">
+                        <div class="fas fa-phone"></div>
+                        <p>+123-456-789</p>
+                    </div>
+                    <div class="detail">
+                        <div class="fas fa-phone"></div>
+                        <p>+111-222-333</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <h4>email:</h4>
+                    <div class="detail">
+                        <div class="fas fa-envelope"></div>
+                        <p class="gmail">mightvr@gmail.com</p>
+                    </div>
+                    <div class="detail">
+                        <div class="fas fa-envelope"></div>
+                        <p class="gmail">mightvrexpress@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <h4>linkedin:</h4>
+                    <div class="detail">
+                        <div class="fab fa-linkedin"></div>
+                        <p class="linkedin">https://www.linkedin.com/</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <h4>github:</h4>
+                    <div class="detail">
+                        <div class="fab fa-github"></div>
+                        <p class="github">https://github.com/</p>
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" class="contact-form" id="contactUs-Form">
+
+                <input type="text" name="name" class="box" id="name" placeholder="nome" required />
+                <input type="email" name="email" class="box" id="email" placeholder="email" required />
+                <input type="text" name="subject" class="box" id="subject" placeholder="assunto" required />
+                <textarea cols="30" rows="10" name="comment" id="comment" class="box" placeholder="mensagem"></textarea>
+                <button type="submit" class="btn" name="submit" id="submit">enviar mensagem</button>
+
+                <span class="alert" id="msg"></span>
+
+            </form>
+
+        </div>
+
+    </section>
+    <!-------------------- Contact Area (End) -------------------->
+    <!-------------------- Footer Area (Start) -------------------->
+    <footer>
+        <div class="social">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin-in"></a>
+        </div>
+
+        <div class="content">
+            <p>created by <span>MIGHT VR</span> | all rights reserved</p>
+        </div>
+    </footer>
+    <!-------------------- Footer Area (End) -------------------->
+    <!-- JQuery -->
+    <script src="~/vendors/jquery/jquery-3.6.0.js"></script>
+
+    <!-- SWIPER JS -->
+    <script src="~/vendors/swiper/swiper.js"></script>
+
+    <!-- Magnific-Popup JS -->
+    <script src="~/vendors/magnific-popup/jquery.magnific-popup.js"></script>
+
+    <!-- Typed JS -->
+    <script src="~/vendors/typed/typed.js"></script>
+
+    <!-- Custom Script File -->
+    <script src="~/js/script.js"></script>
+    <script src="~/js/scroll-spy.js"></script>
+    <script src="~/js/counter-up.js"></script>
+    <script src="~/js/portfolio.js"></script>
+    <script src="~/js/testi-slider.js"></script>
+    <script src="~/js/blog-slider.js"></script>
+
+    <!---------------- Custom Script ---------------->
+    <!-- Typed Script -->
+    <script>
+        var typed = new Typed('.typing-text', {
+
+            strings: ['Inovando Realidades', 'Criando Experiências Imersivas', 'Transformando Sonhos em Realidade', 'Conectando Pessoas através da VR', 'Desenvolvendo o Amanhã', 'Somos o Futuro'],
+            typeSpeed: 30,
+            loop: true
+        });
+    </script>
+
+    <!-- Contact-Form Script -->
+    <script>
+        jQuery('#contactUs-Form').on('submit', function (e) {
+            jQuery('#msg').html('');
+            jQuery('#submit').html('Please wait');
+            jQuery('#submit').attr('disabled', true);
+            jQuery.ajax({
+                url: '~/php/submit.php',
+                type: 'post',
+                data: jQuery('#contactUs-Form').serialize(),
+                success: function (result) {
+                    jQuery('#msg').html(result);
+                    jQuery('#submit').html('Submit');
+                    jQuery('#submit').attr('disabled', false);
+                    jQuery('#contactUs-Form')[0].reset();
+                }
+            });
+            e.preventDefault();
+        });
+    </script>
+    <script>
+        // Script to handle the dropdown functionality
+        document.querySelector('.dropdown').addEventListener('mouseover', function () {
+            this.querySelector('.dropdown-content').style.display = 'block';
+        });
+
+        document.querySelector('.dropdown').addEventListener('mouseout', function () {
+            this.querySelector('.dropdown-content').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

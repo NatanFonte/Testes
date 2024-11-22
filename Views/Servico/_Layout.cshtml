@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   
+
+</head>
+
+<body>
+    <header>
+      
+    </header>
+    <div>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Magnific-Popup JS -->
+    <script src="~/vendors/magnific-popup/jquery.magnific-popup.js"></script>
+
+
+    <!-- SWIPER JS -->
+    <script src="~/vendors/swiper/swiper.js"></script>
+
+
+    <!-- Custom Script File -->
+    <script src="~/js/script.js"></script>
+    <script src="~/js/scroll-spy.js"></script>
+    <script src="~/js/counter-up.js"></script>
+    <script src="~/js/portfolio.js"></script>
+    <script src="~/js/testi-slider.js"></script>
+    <script src="~/js/blog-slider.js"></script>
+
+</body>
+
+
+</html>
