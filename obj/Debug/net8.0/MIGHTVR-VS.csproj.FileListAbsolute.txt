@@ -182,3 +182,11 @@ C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\obj\Debug\net8.0
 C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\obj\Debug\net8.0\MIGHTVR-VS.pdb
 C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\obj\Debug\net8.0\MIGHTVR-VS.genruntimeconfig.cache
 C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\obj\Debug\net8.0\ref\MIGHTVR-VS.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\obj\Debug\net8.0\MIGHTVR-VS.sourcelink.json
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\bin\Debug\net8.0\Highsoft.Web.Mvc.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor.Host.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\bin\Debug\net8.0\Microsoft.Extensions.Globalization.CultureInfoCache.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\bin\Debug\net8.0\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Aluno Noite\Desktop\bagulho-do-visual-studio-22-master\obj\Debug\net8.0\MIGHTVR-VS.MvcApplicationPartsAssemblyInfo.cs

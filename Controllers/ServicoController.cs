@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
 using MIGHTVR_VS.Models;
 using MIGHTVR_VS.Repositorio;
+using MIGHTVR_VS.ORM4;
 using System.Diagnostics;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MIGHTVR_VS.Controllers
 {
     public class ServicoController : Controller
@@ -15,41 +16,44 @@ namespace MIGHTVR_VS.Controllers
             _servicoRepositorio = servicoRepositorio;
             _logger = logger;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
-            List<SelectListItem> tipoServico = new List<SelectListItem>
-              {
-                  new SelectListItem { Value = "0", Text = "Consultoria" },
-                  new SelectListItem { Value = "1", Text = "Desenvolvimento de Software" },
-                  new SelectListItem { Value = "2", Text = "Design Gráfico" },
-                  new SelectListItem { Value = "3", Text = "Marketing Digital" },
-                  new SelectListItem { Value = "4", Text = "Deenvolvimento Web" },
-                  new SelectListItem { Value = "5", Text = "Redesign de Sites" },
-              };
+            // Chama o método ListarNomesAgendamentos para obter a lista de usuários
+            var nomeServicos = _servicoRepositorio.ListarNomesServicos();
 
-            ViewBag.lstTipoServico = new SelectList(tipoServico, "Value", "Text");
-            var Servicos = _servicoRepositorio.ListarServicos();
-            return View(Servicos);
+            if (nomeServicos != null && nomeServicos.Any())
+            {
+                // Cria a lista de SelectListItem
+                var selectList = nomeServicos.Select(u => new SelectListItem
+                {
+                    Value = u.Id.ToString(),  // O valor do item será o ID do usuário
+                    Text = u.TipoServico             // O texto exibido será o nome do usuário
+                }).ToList();
+
+                // Passa a lista para o ViewBag para ser utilizada na view
+                ViewBag.Servicos = selectList;
+            }
+            var servicos = _servicoRepositorio.ListarServicos();
+            return View(servicos);
         }
-
-        public IActionResult InserirServico(decimal Valor, string TipoServico)
+        public IActionResult InserirServico(string tipoServico, decimal Valor)
         {
             try
             {
                 // Chama o método do repositório que realiza a inserção no banco de dados
-                var resultado = _servicoRepositorio.InserirServico(TipoServico, Valor);
+                var resultado = _servicoRepositorio.InserirServico(tipoServico, Valor);
 
                 // Verifica o resultado da inserção
                 if (resultado)
                 {
                     // Se o resultado for verdadeiro, significa que o usuário foi inserido com sucesso
-                    return Json(new { success = true, message = "Serviço inserido com sucesso!" });
+                    return Json(new { success = true, message = "Servico inserido com sucesso!" });
                 }
                 else
                 {
                     // Se o resultado for falso, significa que houve um erro ao tentar inserir o usuário
-                    return Json(new { success = false, message = "Erro ao inserir o serviço. Tente novamente." });
+                    return Json(new { success = false, message = "Erro ao inserir o servico. Tente novamente." });
                 }
             }
             catch (Exception ex)
@@ -58,13 +62,12 @@ namespace MIGHTVR_VS.Controllers
                 return Json(new { success = false, message = "Erro ao processar a solicitação. Detalhes: " + ex.Message });
             }
         }
-
-        public IActionResult AtualizarServico(int id, decimal Valor, string TipoServico)
+        public IActionResult AtualizarServico(int id, string tipoServico, decimal valor)
         {
             try
             {
                 // Chama o repositório para atualizar o usuário
-                var resultado = _servicoRepositorio.AtualizarServico(id, Valor, TipoServico);
+                var resultado = _servicoRepositorio.AtualizarServico(id, tipoServico, valor);
 
                 if (resultado)
                 {
@@ -72,7 +75,7 @@ namespace MIGHTVR_VS.Controllers
                 }
                 else
                 {
-                    return Json(new { success = false, message = "Erro ao atualizar o usuário. Verifique se o serviço existe." });
+                    return Json(new { success = false, message = "Erro ao atualizar o serviço. Verifique se o usuário existe." });
                 }
             }
             catch (Exception ex)
@@ -80,7 +83,6 @@ namespace MIGHTVR_VS.Controllers
                 return Json(new { success = false, message = "Erro ao processar a solicitação. Detalhes: " + ex.Message });
             }
         }
-
         public IActionResult ExcluirServico(int id)
         {
             try
@@ -90,19 +92,20 @@ namespace MIGHTVR_VS.Controllers
 
                 if (resultado)
                 {
-                    return Json(new { success = true, message = "Serviço excluído com sucesso!" });
+                    return Json(new { success = true, message = "Servico excluído com sucesso!" });
                 }
                 else
                 {
-                    return Json(new { success = false, message = "Erro ao excluir o serviço. Verifique se o serviço existe." });
+                    // Se o resultado for falso, você pode fornecer uma mensagem mais específica.
+                    return Json(new { success = false, message = "Não foi possível excluir o serviço. Verifique se ele está vinculado a outros registros no sistema." });
                 }
             }
             catch (Exception ex)
             {
+                // Captura qualquer erro e inclui a mensagem detalhada da exceção
                 return Json(new { success = false, message = "Erro ao processar a solicitação. Detalhes: " + ex.Message });
             }
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

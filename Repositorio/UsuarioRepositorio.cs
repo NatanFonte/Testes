@@ -1,5 +1,6 @@
-﻿using MIGHTVR_VS.Models;
-using MIGHTVR_VS.ORM2;
+﻿using Microsoft.EntityFrameworkCore;
+using MIGHTVR_VS.Models;
+using MIGHTVR_VS.ORM4;
 
 namespace MIGHTVR_VS.Repositorio
 {
@@ -7,9 +8,47 @@ namespace MIGHTVR_VS.Repositorio
     {
 
         private BdMightvrContext _context;
+
         public UsuarioRepositorio(BdMightvrContext context)
         {
             _context = context;
+        }
+
+        public UsuarioVM VerificarLogin(string email, string senha)
+        {
+            // Verifica se o e-mail e a senha estão presentes no banco de dados
+            var usuario = _context.TbUsuarios
+                .FirstOrDefault(u => u.Email == email && u.Senha == senha);
+
+            // Se encontrar o usuário, cria um objeto UsuarioVM para retornar
+            if (usuario != null)
+            {
+                var usuarioVM = new UsuarioVM
+                {
+                    Id = usuario.Id,
+                    Nome = usuario.Nome,
+                    Email = usuario.Email,
+                    Telefone = usuario.Telefone,
+                    Senha = usuario.Senha, // Senha pode ser omitida por questões de segurança
+                    TipoUsuario = usuario.TipoUsuario
+                };
+                // Definindo variáveis de ambiente
+                Environment.SetEnvironmentVariable("USUARIO_ID", usuario.Id.ToString());
+                Environment.SetEnvironmentVariable("USUARIO_NOME", usuario.Nome);
+                Environment.SetEnvironmentVariable("USUARIO_EMAIL", usuario.Email);
+                Environment.SetEnvironmentVariable("USUARIO_TELEFONE", usuario.Senha);
+                Environment.SetEnvironmentVariable("USUARIO_TIPO", usuario.TipoUsuario.ToString());
+                return usuarioVM;
+            }
+            // Acessando as variáveis de ambiente
+            /*string id = Environment.GetEnvironmentVariable("USUARIO_ID");
+            string nome = Environment.GetEnvironmentVariable("USUARIO_NOME");
+            string email = Environment.GetEnvironmentVariable("USUARIO_EMAIL");
+            string telefone = Environment.GetEnvironmentVariable("USUARIO_TELEFONE");
+            string tipoUsuario = Environment.GetEnvironmentVariable("USUARIO_TIPO");
+            // Se não encontrar o usuário, retorna null ou uma exceção
+            */
+            return null; // Ou você pode lançar uma exceção, dependendo de sua estratégia
         }
         public bool InserirUsuario(string nome, string email, string telefone, string senha, int tipoUsuario)
         {
@@ -34,15 +73,15 @@ namespace MIGHTVR_VS.Repositorio
             }
         }
 
-        public List<Usuario> ListarUsuarios()
+        public List<UsuarioVM> ListarUsuarios()
         {
-            List<Usuario> listFun = new List<Usuario>();
+            List<UsuarioVM> listFun = new List<UsuarioVM>();
 
             var listTb = _context.TbUsuarios.ToList();
 
             foreach (var item in listTb)
             {
-                var usuarios = new Usuario
+                var usuarios = new UsuarioVM
                 {
                     Id = item.Id,
                     Nome = item.Nome,
@@ -89,31 +128,38 @@ namespace MIGHTVR_VS.Repositorio
                 return false;
             }
         }
-
         public bool ExcluirUsuario(int id)
         {
             try
             {
                 // Busca o usuário pelo ID
                 var usuario = _context.TbUsuarios.FirstOrDefault(u => u.Id == id);
-                if (usuario != null)
-                {
-                    // Remove o usuário do banco de dados
-                    _context.TbUsuarios.Remove(usuario);
-                    _context.SaveChanges();
 
-                    return true;  // Retorna verdadeiro se a exclusão for bem-sucedida
-                }
-                else
+                // Se o usuário não for encontrado, lança uma exceção personalizada
+                if (usuario == null)
                 {
-                    return false;  // Retorna falso se o usuário não foi encontrado
+                    throw new KeyNotFoundException("Usuário não encontrado.");
                 }
+
+
+                // Remove o usuário do banco de dados
+                _context.TbUsuarios.Remove(usuario);
+                _context.SaveChanges();  // Isso pode lançar uma exceção se houver dependências
+
+                // Se tudo correr bem, retorna true indicando sucesso
+                return true;
+
             }
             catch (Exception ex)
             {
+                // Aqui tratamos qualquer erro inesperado e logamos para depuração
                 Console.WriteLine($"Erro ao excluir o usuário com ID {id}: {ex.Message}");
-                return false;
+
+                // Relança a exceção para ser capturada pelo controlador
+                throw new Exception($"Erro ao excluir o usuário: {ex.Message}");
             }
         }
+
+
     }
 }

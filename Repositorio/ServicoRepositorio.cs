@@ -1,6 +1,6 @@
 ﻿using MIGHTVR_VS.Models;
-using MIGHTVR_VS.ORM2;
-
+using MIGHTVR_VS.Repositorio;
+using MIGHTVR_VS.ORM4;
 namespace MIGHTVR_VS.Repositorio
 {
     public class ServicoRepositorio
@@ -10,79 +10,125 @@ namespace MIGHTVR_VS.Repositorio
         {
             _context = context;
         }
-        public bool InserirServico(string tipoServico, decimal Valor)
+        public bool InserirServico(string tipoServico, decimal valor)
         {
             try
             {
-                TbServico servico = new TbServico();
-                servico.Valor = Valor;
-                servico.TipoServico = tipoServico;
+                // Criando uma instância do modelo ServicoVM
+                TbServico servico = new TbServico
+                {
+                    TipoServico = tipoServico,
+                    Valor = valor
+                };
 
-                _context.TbServicos.Add(servico);  // Supondo que _context.TbUsuarios seja o DbSet para a entidade de usuários
-                _context.SaveChanges();
+                // Supondo que _context.TbServicos seja o DbSet para a entidade de serviços no seu DbContext
+                _context.TbServicos.Add(servico);  // Adiciona o serviço ao contexto
+                _context.SaveChanges();  // Salva as mudanças no banco de dados
 
-                return true;  // Retorna true para indicar sucesso
+                return true;  // Retorna true para indicar que a operação foi bem-sucedida
             }
             catch (Exception ex)
             {
-                // Trate o erro ou faça um log do ex.Message se necessário
-                return false;  // Retorna false para indicar falha
+                // Aqui você pode registrar o erro (ex.Message) ou tratá-lo conforme necessário
+                return false;  // Retorna false em caso de falha
             }
         }
-
-        public List<Servico> ListarServicos()
+        public List<ServicoVM> ListarServicos()
         {
-            List<Servico> listFun = new List<Servico>();
+            List<ServicoVM> listServicos = new List<ServicoVM>();
 
+            // Recuperando todos os serviços do DbSet
             var listTb = _context.TbServicos.ToList();
 
             foreach (var item in listTb)
             {
-                var servicos = new Servico
+                var servico = new ServicoVM
                 {
                     Id = item.Id,
-                    Valor = item.Valor,
                     TipoServico = item.TipoServico,
+                    Valor = item.Valor
                 };
 
-                listFun.Add(servicos);
+                listServicos.Add(servico);
             }
 
-            return listFun;
+            return listServicos;
         }
-
-        public bool AtualizarServico(int id, decimal valor, string tipoServico)
+        public bool AtualizarServico(int id, string tipoServico, decimal valor)
         {
-            var servico = _context.TbServicos.Find(id); // Usando o Find para pegar o serviço pelo ID
-
-            if (servico == null)
+            try
             {
-                return false; // Retorna false se o serviço não for encontrado
+                // Busca o serviço pelo ID
+                var servico = _context.TbServicos.FirstOrDefault(s => s.Id == id);
+                if (servico != null)
+                {
+                    // Atualiza os dados do serviço
+                    servico.TipoServico = tipoServico;
+                    servico.Valor = valor;
+
+                    // Salva as mudanças no banco de dados
+                    _context.SaveChanges();
+
+                    return true;  // Retorna verdadeiro se a atualização for bem-sucedida
+                }
+                else
+                {
+                    return false;  // Retorna falso se o serviço não for encontrado
+                }
             }
-
-            servico.TipoServico = tipoServico;
-            servico.Valor = valor;
-
-            _context.SaveChanges(); // Persiste as mudanças no banco de dados
-            return true; // Retorna true após a atualização
+            catch (Exception ex)
+            {
+                // Em caso de erro, loga a exceção (opcional)
+                Console.WriteLine($"Erro ao atualizar o serviço com ID {id}: {ex.Message}");
+                return false;
+            }
         }
-
-
-        public bool ExcluirServico(int idServico)
+        public bool ExcluirServico(int id)
         {
-            var servico = _context.TbServicos.Find(idServico); // Busca o serviço
-            if (servico == null)
+            try
             {
-                return false;  // Retorna falso se o serviço não for encontrado
+                // Busca o serviço pelo ID
+                var servico = _context.TbServicos.FirstOrDefault(s => s.Id == id);
+
+                // Se o serviço não for encontrado, lança uma exceção personalizada
+                if (servico == null)
+                {
+                    throw new KeyNotFoundException("Serviço não encontrado.");
+                }
+
+                // Remove o serviço do banco de dados
+                _context.TbServicos.Remove(servico);
+                _context.SaveChanges();  // Isso pode lançar uma exceção se houver dependências
+
+                // Se tudo correr bem, retorna true indicando sucesso
+                return true;
+
             }
+            catch (Exception ex)
+            {
+                // Aqui tratamos qualquer erro inesperado e logamos para depuração
+                Console.WriteLine($"Erro ao excluir o serviço com ID {id}: {ex.Message}");
 
-            _context.TbServicos.Remove(servico); // Remove o serviço
-            _context.SaveChanges(); // Persiste as mudanças no banco de dados
-            return true;  // Retorna true após a exclusão
+                // Relança a exceção para ser capturada pelo controlador
+                throw new Exception($"Erro ao excluir o serviço: {ex.Message}");
+            }
         }
+        public List<ServicoVM> ListarNomesServicos()
+        {
+            // Recupera os serviços com filtragem e projeção para ServicoVM diretamente no banco de dados
+            var query = _context.TbServicos.ToList();
 
+            // Projeta diretamente para ServicoVM e retorna como lista
+            var listServicos = _context.TbServicos
+                .Select(s => new ServicoVM
+                {
+                    Id = s.Id,
+                    TipoServico = s.TipoServico,
+                })
+                .ToList();
 
-
+            return listServicos;
+        }
     }
 }
 

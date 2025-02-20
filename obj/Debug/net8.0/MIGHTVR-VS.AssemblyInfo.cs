@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MIGHTVR-VS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9f8c157cf0b995e889d61dcdd33c3fcdd344320")]
 [assembly: System.Reflection.AssemblyProductAttribute("MIGHTVR-VS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MIGHTVR-VS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
